@@ -13,8 +13,9 @@ body {
   display: flex !important;       /* Three-column layout */
   flex-direction: column;         /* stack on small screens */
   gap: 24px;                      /* space between sections */
-  align-items: flex-start;
+  align-items: center;            /* center inner elements */
   flex-wrap: wrap !important;
+  width: 100%;                    /* use available width */
   font-family: 'Inter', 'Roboto', sans-serif;
 }
 
@@ -46,21 +47,18 @@ body {
   width: 100%;
 }
 
-/* Desktop layout: side-by-side columns */
+/* Desktop layout */
 @media (min-width: 768px) {
+  /* Keep vertical layout but increase spacing */
   #fbuilder .dfield.fapp {
-    flex-direction: row;
     gap: 48px;
   }
-  #fbuilder .profileColumn {
-    flex: 0 0 30%;
-    max-width: 260px;
-  }
-  #fbuilder .fieldCalendar {
-    flex: 0 0 40%;
-  }
+  /* Ensure each section uses full width */
+  #fbuilder .profileColumn,
+  #fbuilder .fieldCalendar,
   #fbuilder .slotsCalendar {
-    flex: 0 0 30%;
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 }
 
@@ -80,14 +78,21 @@ body {
   box-shadow: none !important;
   color: #0F172A;
   padding: 32px !important;
-  width: 100% !important;
+  width: fit-content !important;
   box-sizing: border-box;
 }
 #fbuilder .ui-datepicker-inline {
   max-width: none !important;
-  width: 100% !important;
+  width: fit-content !important;
 }
 
+#fbuilder .ui-datepicker table {
+  width: auto;
+  table-layout: fixed;
+}
+#fbuilder .ui-datepicker-calendar {
+  height: 250px;
+}
 #fbuilder .ui-datepicker table,
 #fbuilder .ui-datepicker thead,
 #fbuilder .ui-datepicker tr,
@@ -161,15 +166,21 @@ body {
   padding: 4px;
   text-align: center;
 }
+#fbuilder .ui-datepicker td,
 #fbuilder .ui-datepicker td a,
 #fbuilder .ui-datepicker td span {
-  display: block;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
+}
+#fbuilder .ui-datepicker td a,
+#fbuilder .ui-datepicker td span {
+  display: flex;
+  align-items: center;              /* center day numbers vertically */
+  justify-content: center;          /* center day numbers horizontally */
   background: #E5E7EB !important;
   color: #374151 !important;
   border-radius: 8px !important;
-  line-height: 44px !important;
+  font-size: 16px;                  /* slightly larger font */
   font-weight: 500;
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
   opacity: 1 !important;
@@ -211,6 +222,12 @@ body {
   justify-items: center;
   margin: 0 auto;
 
+}
+#fbuilder .slotsCalendar.slotsCalendarfieldname1_1 .slots div:first-child {
+  grid-column: 2;
+}
+#fbuilder .slotsCalendar.slotsCalendarfieldname1_1 .slots div:nth-child(n+2) {
+  grid-row-start: 2;
 }
 #fbuilder .slots div a {
   display: flex;
@@ -306,12 +323,18 @@ body {
 
 
 @media (max-width: 520px) {
+  #fbuilder .ui-datepicker td,
   #fbuilder .ui-datepicker td a,
   #fbuilder .ui-datepicker td span {
-    width: 38px;
-    height: 38px;
-    line-height: 38px !important;
+    width: 40px;
+    height: 40px;
+  }
+  #fbuilder .ui-datepicker td a,
+  #fbuilder .ui-datepicker td span {
     font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   #fbuilder .slots {
     grid-template-columns: 1fr;

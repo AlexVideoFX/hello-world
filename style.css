@@ -117,10 +117,11 @@
   width: 100%;
   background: #F0F0F0 !important;    /* light‑gray tile */
   color: #333333 !important;         /* dark number */
-  border-radius: 6px;
-  line-height: 28px;  
+  border-radius: 6px !important;
+  line-height: 28px !important;
   font-weight: 500;
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+  opacity: 1 !important;             /* ensure visible */
 }
 
 /* Hover on available days → LavaRun green */
@@ -133,7 +134,7 @@
 #fbuilder .ui-datepicker td a.ui-state-active {
   background: #E15252 !important; /* Bold red */
   color: #FFFFFF !important;      /* White text */
-  transform: scale(1.05);         /* Slight “pop” effect */
+  transform: scale(1.05) !important;  /* Slight “pop” effect */
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -193,30 +194,6 @@
 
 
 
-/* ─────────────────────────────────────────────────────────────
-   1) Enlarge the calendar container (override any plugin defaults)
-───────────────────────────────────────────────────────────── */
-#fbuilder .ui-datepicker {
-  width: 320px !important;           /* bump from ~280px to 320px */
-  padding: 16px 12px !important;      /* extra internal padding */
-}
-
-/* ─────────────────────────────────────────────────────────────
-   2) Day‑cell visibility overrides
-   • Force a light‑gray background
-   • Force dark‑gray text
-   • Ensure opacity is 1 and text isn’t hidden by any utility class
-───────────────────────────────────────────────────────────── */
-
-/* Base style for every day cell (anchor or span) */
-#fbuilder .ui-datepicker td a,
-#fbuilder .ui-datepicker td span {
-  background: #F0F0F0 !important;    /* light‑gray tile */
-  color: #333333 !important;         /* dark‑gray number */
-  opacity: 1 !important;             /* override any hidden/disabled opacity */
-  border-radius: 6px !important;     /* keep rounded corners */
-  line-height: 28px !important;      /* vertically center the number */
-}
 
 /* If jQuery-UI added ui-helper-hidden-accessible on spans, override it too */
 #fbuilder .ui-helper-hidden-accessible {
@@ -226,19 +203,6 @@
   width: auto !important;
   overflow: visible !important;
   opacity: 1 !important;
-}
-
-/* Hover on an available day → LavaRun green with white text */
-#fbuilder .ui-datepicker td:not(.ui-datepicker-unselectable) a:hover {
-  background: #20B2AA !important;     /* LavaRun green */
-  color: #FFFFFF !important;          /* white text on hover */
-}
-
-/* Selected day → LavaRun red with white text */
-#fbuilder .ui-datepicker td a.ui-state-active {
-  background: #E15252 !important;     /* LavaRun red */
-  color: #FFFFFF !important;          /* white text when selected */
-  transform: scale(1.05) !important;  /* slight “pop” effect */
 }
 
 /* Disabled/past days → very light gray + muted text */

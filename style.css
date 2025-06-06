@@ -1,0 +1,325 @@
+/* ─────────────────────────────────────────────────────────────
+   1) Container styling: overall booking form “card” on a dark page
+───────────────────────────────────────────────────────────── */
+#fbuilder .dfield.fapp {
+  background: #000000;            /* Black background behind calendar & slots */
+  border-radius: 12px;            /* Rounded corners like your top form */
+  padding: 24px;                  /* Inner spacing */
+  display: flex !important;       /* Force side-by-side layout */
+  flex-wrap: wrap !important;     /* Allow wrapping on narrow screens */
+  gap: 32px;                      /* Gap between calendar & slots */
+  align-items: flex-start;        /* Align top edges */
+  font-family: 'Roboto', sans-serif; /* LavaRun’s standard font */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   2) Layout: Calendar on left, Slots on right (50/50 on desktop)
+───────────────────────────────────────────────────────────── */
+#fbuilder .fieldCalendar,
+#fbuilder .slotsCalendar {
+  flex: 1 1 300px;                /* Grow/shrink with min-width 300px */
+  max-width: calc(50% - 10px);    /* Roughly half the container minus gap */
+  min-width: 280px;               /* Prevents too-narrow boxes */
+  box-sizing: border-box;         /* Include padding in width */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   3) Animate‐in behavior: hide slots panel until a date is clicked
+───────────────────────────────────────────────────────────── */
+#fbuilder .slotsCalendar {
+  max-height: 0;                  /* Collapsed by default */
+  opacity: 0;                     /* Invisible until activated */
+  transform: translateY(-8px);    /* Slide up slightly */
+  transition: all 0.4s ease-in-out; /* Smooth slide/fade in */
+  overflow: hidden;               /* Hide overflow when collapsed */
+}
+#fbuilder .slotsCalendar.active {
+  max-height: 800px;              /* Large enough to show all slots */
+  opacity: 1;                     /* Fully visible */
+  transform: translateY(0);       /* Slide down into place */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   4) Calendar base: white “card” background so dates are visible
+───────────────────────────────────────────────────────────── */
+#fbuilder .ui-datepicker {
+  background: #FFFFFF !important; /* White background like top form */
+  border-radius: 10px;            /* Rounded corners to match */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Gentle drop shadow */
+  color: #333333;                 /* Dark default text color */
+  width: 320px !important;           /* increased from ~280px to 320px */
+  padding: 16px 12px !important;      /* extra padding inside the calendar */
+  box-sizing: border-box;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   5) Calendar header (month/year + arrows)
+───────────────────────────────────────────────────────────── */
+#fbuilder .ui-datepicker-header {
+  background: transparent !important; /* No extra background */
+  text-align: center;
+  padding: 8px 0;
+  font-size: 1.4rem;              /* Slightly larger for emphasis */
+  font-weight: 500;
+  color: #FFFFFF !important;      /* White text on black header background */
+  /* To put the header on black, override parent background */
+}
+#fbuilder .ui-datepicker .ui-datepicker-title {
+  background: #1a1a1a;            /* Black behind the month/year text */
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: #FFFFFF !important;      /* White month/year letters */
+  display: inline-block;
+}
+
+/* Arrows (prev/next) styling */
+#fbuilder .ui-datepicker-prev,
+#fbuilder .ui-datepicker-next {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin: 0 12px;
+  border: 2px solid #FFFFFF;      /* White circular border */
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+#fbuilder .ui-datepicker-prev:after,
+#fbuilder .ui-datepicker-next:after {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid #FFFFFF;  /* White arrow shape */
+  border-right: 2px solid #FFFFFF;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+#fbuilder .ui-datepicker-prev:after  { transform: translate(-50%, -50%) rotate(-135deg); }
+#fbuilder .ui-datepicker-next:after  { transform: translate(-50%, -50%) rotate(45deg); }
+
+/* ─────────────────────────────────────────────────────────────
+   6) Weekday headings (DOM, SEG, TER, …)
+───────────────────────────────────────────────────────────── */
+#fbuilder .ui-datepicker th {
+  background: transparent;        /* No shading behind weekday titles */
+  color: #555555;                 /* Medium‐dark text for weekdays */
+  font-weight: 500;
+  padding: 6px 0;
+  text-transform: uppercase;      /* Uppercase DOM/SEG/TER/etc. */
+  font-size: 0.9rem;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   7) Day cells: light‐grey squares, dark text
+───────────────────────────────────────────────────────────── */
+#fbuilder .ui-datepicker td {
+  padding: 6px 0;
+  text-align: center;
+}
+#fbuilder .ui-datepicker td a,
+#fbuilder .ui-datepicker td span {
+  display: block;
+  width: 100%;
+  background: #F0F0F0 !important;    /* light‑gray tile */
+  color: #333333 !important;         /* dark number */
+  border-radius: 6px;
+  line-height: 28px;  
+  color: #333333;                 /* Dark day numbers */
+  font-weight: 500;
+  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+/* Hover on available days → LavaRun green */
+#fbuilder .ui-datepicker td:not(.ui-datepicker-unselectable) a:hover {
+  background: #20B2AA !important;     /* LavaRun green */
+  color: #FFFFFF !important;          /* white text when hovered */
+}
+
+/* Selected day styling → LavaRun red */
+#fbuilder .ui-datepicker td a.ui-state-active {
+  background: #E15252 !important; /* Bold red */
+  color: #FFFFFF !important;      /* White text */
+  transform: scale(1.05);         /* Slight “pop” effect */
+}
+
+/* Disabled/past days → greyed out, non‑clickable */
+#fbuilder .ui-datepicker-unselectable .ui-state-default {
+  background: #E15252 !important;     /* LavaRun red */
+  color: #FFFFFF !important;          /* white text for selected date */
+  transform: scale(1.05); 
+  opacity: 0.6;
+  pointer-events: none; /* Prevent clicking */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   8) Time slots panel: dark background + pill‐style buttons
+───────────────────────────────────────────────────────────── */
+#fbuilder .slots {
+  background: #1a1a1a;            /* Slightly lighter black */
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+#fbuilder .slots div a {
+  display: inline-block;
+  margin: 8px;
+  padding: 12px 20px;
+  border-radius: 8px;             /* Pill shape */
+  background: #F0F0F0;            /* Light pill so text is visible */
+  color: #333333;                 /* Dark text on pill */
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover on slot → blue background, white text */
+#fbuilder .slots div a:hover {
+  background-color: #4CA1AF !important; /* Medium teal */
+  color: #FFFFFF !important;
+}
+
+/* Selected slot styling → LavaRun green */
+#fbuilder .slots .currentSelection a {
+  background-color: #20B2AA !important; /* Soft green */
+  color: #FFFFFF !important;            /* White text */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   9) Form labels & inputs: white text on black background
+───────────────────────────────────────────────────────────── */
+#fbuilder label,
+#fbuilder input[type="text"],
+#fbuilder input[type="email"],
+#fbuilder select,
+#fbuilder textarea,
+#fbuilder .uh {
+  color: #FFFFFF !important;      /* White labels/hints */
+}
+#fbuilder input[type="text"],
+#fbuilder input[type="email"],
+#fbuilder select,
+#fbuilder textarea {
+  background: transparent !important; /* Allows black container to show */
+  border: 1px solid #CCCCCC !important; /* Light grey outline */
+  border-radius: 6px !important;
+  padding: 8px !important;
+  color: #FFFFFF !important;      /* White text inside inputs */
+}
+
+
+
+/* ─────────────────────────────────────────────────────────────
+   1) Enlarge the calendar container (override any plugin defaults)
+───────────────────────────────────────────────────────────── */
+#fbuilder .ui-datepicker {
+  width: 320px !important;           /* bump from ~280px to 320px */
+  padding: 16px 12px !important;      /* extra internal padding */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   2) Day‑cell visibility overrides
+   • Force a light‑gray background
+   • Force dark‑gray text
+   • Ensure opacity is 1 and text isn’t hidden by any utility class
+───────────────────────────────────────────────────────────── */
+
+/* Base style for every day cell (anchor or span) */
+#fbuilder .ui-datepicker td a,
+#fbuilder .ui-datepicker td span {
+  background: #F0F0F0 !important;    /* light‑gray tile */
+  color: #333333 !important;         /* dark‑gray number */
+  opacity: 1 !important;             /* override any hidden/disabled opacity */
+  border-radius: 6px !important;     /* keep rounded corners */
+  line-height: 28px !important;      /* vertically center the number */
+}
+
+/* If jQuery-UI added ui-helper-hidden-accessible on spans, override it too */
+#fbuilder .ui-helper-hidden-accessible {
+  position: static !important;       /* prevent moving offscreen */
+  clip: auto !important;             /* undo clipping */
+  height: auto !important;
+  width: auto !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+}
+
+/* Hover on an available day → LavaRun green with white text */
+#fbuilder .ui-datepicker td:not(.ui-datepicker-unselectable) a:hover {
+  background: #20B2AA !important;     /* LavaRun green */
+  color: #FFFFFF !important;          /* white text on hover */
+}
+
+/* Selected day → LavaRun red with white text */
+#fbuilder .ui-datepicker td a.ui-state-active {
+  background: #E15252 !important;     /* LavaRun red */
+  color: #FFFFFF !important;          /* white text when selected */
+  transform: scale(1.05) !important;  /* slight “pop” effect */
+}
+
+/* Disabled/past days → very light gray + muted text */
+#fbuilder .ui-datepicker-unselectable .ui-state-default {
+  background: #E0E0E0 !important;     /* very light gray */
+  color: #AAAAAA !important;          /* muted gray text */
+  opacity: 1 !important;              /* ensure visible but muted */
+  pointer-events: none !important;    /* non‑clickable */
+}
+
+
+
+
+
+
+
+
+
+/* ─────────────────────────────────────────────────────────────
+   10) Submit button: consistent with LavaRun green/red hover
+───────────────────────────────────────────────────────────── */
+#fbuilder .pbSubmit {
+  background: #20B2AA !important;  /* Soft green */
+  color: #FFFFFF !important;
+  border: 2px solid #20B2AA !important;
+  border-radius: 6px !important;
+  padding: 10px 20px !important;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+#fbuilder .pbSubmit:hover {
+  background: #E15252 !important; /* Bold red */
+  border-color: #E15252 !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   11) Responsive: stack calendar & slots on mobile screens
+───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  #fbuilder .dfield.fapp {
+    flex-direction: column !important;
+  }
+  #fbuilder .fieldCalendar,
+  #fbuilder .slotsCalendar {
+    max-width: 100% !important;
+    flex: none !important;
+    margin-bottom: 20px;
+  }
+
+  /* Shrink arrow icons slightly for mobile */
+  #fbuilder .ui-datepicker-prev,
+  #fbuilder .ui-datepicker-next {
+    width: 18px;
+    height: 18px;
+    margin: 0 8px;
+  }
+  #fbuilder .ui-datepicker-prev:after,
+  #fbuilder .ui-datepicker-next:after {
+    width: 4px;
+    height: 4px;
+    border-top-width: 1.5px;
+    border-right-width: 1.5px;
+  }
+}

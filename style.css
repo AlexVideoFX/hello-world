@@ -309,3 +309,78 @@ body {
     width: 100%;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   12) Table cleanup and formfields container
+───────────────────────────────────────────────────────────── */
+#fbuilder .formfields,
+.formfields {
+  margin: 0 auto !important;
+  padding: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  background: #F8FAFC;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.formfields > * {
+  margin: 0;
+  padding: 0;
+}
+
+#fbuilder .formfields table,
+.formfields table {
+  width: auto !important;
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+#fbuilder .formfields th,
+#fbuilder .formfields td,
+.formfields th,
+.formfields td {
+  padding: 2px 4px;
+  border: 1px solid #E2E8F0;
+  text-align: left;
+}
+
+.formfields th {
+  background: #F8FAFC;
+  font-weight: 600;
+}
+
+.formfields input,
+.formfields select,
+.formfields textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formfields label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.formfields button,
+.formfields input[type="submit"],
+.formfields input[type="button"] {
+  padding: 6px 12px;
+  background: #3182CE;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .formfields {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

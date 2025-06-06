@@ -13,8 +13,9 @@ body {
   display: flex !important;       /* Three-column layout */
   flex-direction: column;         /* stack on small screens */
   gap: 24px;                      /* space between sections */
-  align-items: flex-start;
+  align-items: center;            /* center inner elements */
   flex-wrap: wrap !important;
+  width: 100%;                    /* use available width */
   font-family: 'Inter', 'Roboto', sans-serif;
 }
 

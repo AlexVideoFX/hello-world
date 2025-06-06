@@ -13,8 +13,9 @@ body {
   display: flex !important;       /* Three-column layout */
   flex-direction: column;         /* stack on small screens */
   gap: 24px;                      /* space between sections */
-  align-items: flex-start;
+  align-items: center;            /* center inner elements */
   flex-wrap: wrap !important;
+  width: 100%;                    /* use available width */
   font-family: 'Inter', 'Roboto', sans-serif;
 }
 
@@ -46,21 +47,18 @@ body {
   width: 100%;
 }
 
-/* Desktop layout: side-by-side columns */
+/* Desktop layout */
 @media (min-width: 768px) {
+  /* Keep vertical layout but increase spacing */
   #fbuilder .dfield.fapp {
-    flex-direction: row;
     gap: 48px;
   }
-  #fbuilder .profileColumn {
-    flex: 0 0 30%;
-    max-width: 260px;
-  }
-  #fbuilder .fieldCalendar {
-    flex: 0 0 40%;
-  }
+  /* Ensure each section uses full width */
+  #fbuilder .profileColumn,
+  #fbuilder .fieldCalendar,
   #fbuilder .slotsCalendar {
-    flex: 0 0 30%;
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 }
 
@@ -164,12 +162,12 @@ body {
 #fbuilder .ui-datepicker td a,
 #fbuilder .ui-datepicker td span {
   display: block;
-  width: 44px;
-  height: 44px;
+  width: 100%;
+  height: 100%;
   background: #E5E7EB !important;
   color: #374151 !important;
   border-radius: 8px !important;
-  line-height: 44px !important;
+  line-height: 100% !important;
   font-weight: 500;
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
   opacity: 1 !important;
@@ -308,9 +306,9 @@ body {
 @media (max-width: 520px) {
   #fbuilder .ui-datepicker td a,
   #fbuilder .ui-datepicker td span {
-    width: 38px;
-    height: 38px;
-    line-height: 38px !important;
+    width: 100%;
+    height: 100%;
+    line-height: 100% !important;
     font-size: 14px;
   }
   #fbuilder .slots {

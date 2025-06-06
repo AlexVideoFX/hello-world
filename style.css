@@ -37,6 +37,7 @@ body {
   overflow-y: auto;
   max-height: 560px;
   box-sizing: border-box;
+  width: 100%;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -60,6 +61,7 @@ body {
 }
 #fbuilder .ui-datepicker-inline {
   max-width: none !important;
+  width: 100% !important;
 }
 
 #fbuilder .ui-datepicker table,
@@ -180,6 +182,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 24px 32px;
+  width: 100%;
 }
 #fbuilder .slots div a {
   display: flex;
@@ -438,6 +441,7 @@ body {
 
 #fbuilder .fieldCalendarService {
   margin-bottom: 20px;
+  width: 100%;
 }
 
 #fbuilder .ahbfield_service {

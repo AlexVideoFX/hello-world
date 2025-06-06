@@ -313,20 +313,35 @@ body {
 /* ─────────────────────────────────────────────────────────────
    12) Table cleanup and formfields container
 ───────────────────────────────────────────────────────────── */
-#fbuilder .formfields {
+#fbuilder .formfields,
+.formfields {
   margin: 0 !important;
   padding: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box;
 }
 
-#fbuilder .formfields table {
-  width: 100%;
+#fbuilder .formfields table,
+.formfields table {
+  width: 100% !important;
+  margin: 0;
   border-collapse: collapse;
   border-spacing: 0;
+  table-layout: fixed;
 }
 
 #fbuilder .formfields th,
-#fbuilder .formfields td {
+#fbuilder .formfields td,
+.formfields th,
+.formfields td {
   padding: 4px 8px;
   border: 1px solid #E2E8F0;
   text-align: left;
+}
+
+.formfields input,
+.formfields select,
+.formfields textarea {
+  width: 100%;
+  box-sizing: border-box;
 }

@@ -315,6 +315,21 @@ body {
 ───────────────────────────────────────────────────────────── */
 #fbuilder .formfields,
 .formfields {
+  margin: 0 auto !important;
+  padding: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  background: #F8FAFC;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.formfields > * {
+  margin: 0;
+  padding: 0;
+=======
   margin: 0 !important;
   padding: 0 !important;
   width: 100% !important;
@@ -323,8 +338,13 @@ body {
 
 #fbuilder .formfields table,
 .formfields table {
+
+  width: auto !important;
+  margin: 0 auto;
+=======
   width: 100% !important;
   margin: 0;
+
   border-collapse: collapse;
   border-spacing: 0;
   table-layout: fixed;
@@ -334,7 +354,11 @@ body {
 #fbuilder .formfields td,
 .formfields th,
 .formfields td {
+
+  padding: 2px 4px;
+=======
   padding: 4px 8px;
+
   border: 1px solid #E2E8F0;
   text-align: left;
 }
@@ -367,6 +391,14 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
+
+
+@media (max-width: 720px) {
+  .formfields {
+    flex-direction: column;
+    align-items: stretch;
+  }
+=======
 =======
    12) Additional plugin utility classes
 ───────────────────────────────────────────────────────────── */
@@ -441,4 +473,5 @@ body {
 
 #fbuilder .captcha {
   margin-top: 16px;
+
 }

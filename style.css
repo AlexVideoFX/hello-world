@@ -1,26 +1,42 @@
 /* ─────────────────────────────────────────────────────────────
-   1) Container styling: overall booking form “card” on a dark page
+   1) Outer canvas and main booking card
 ───────────────────────────────────────────────────────────── */
+body {
+  background: #214840;
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
 #fbuilder .dfield.fapp {
-  background: #000000;            /* Black background behind calendar & slots */
-  border-radius: 12px;            /* Rounded corners like your top form */
-  padding: 24px;                  /* Inner spacing */
-  display: flex !important;       /* Force side-by-side layout */
-  flex-wrap: wrap !important;     /* Allow wrapping on narrow screens */
-  gap: 32px;                      /* Gap between calendar & slots */
-  align-items: flex-start;        /* Align top edges */
-  font-family: 'Roboto', sans-serif; /* LavaRun’s standard font */
+  background: #fff;               /* Pure white main card */
+  border-radius: 24px;            /* Softer rounded corners */
+  box-shadow: 0 12px 32px rgba(0,0,0,.08);
+  padding: 70px 70px 50px;        /* Spacious interior */
+  display: flex !important;       /* Three-column layout */
+  column-gap: 48px;               /* Space between columns */
+  align-items: flex-start;
+  flex-wrap: wrap !important;
+  font-family: 'Inter', 'Roboto', sans-serif;
 }
 
 /* ─────────────────────────────────────────────────────────────
-   2) Layout: Calendar on left, Slots on right (50/50 on desktop)
+   2) Three column layout: Profile, Calendar, Slots
 ───────────────────────────────────────────────────────────── */
-#fbuilder .fieldCalendar,
+#fbuilder .profileColumn {
+  flex: 0 0 30%;
+  max-width: 260px;
+  text-align: left;
+  box-sizing: border-box;
+}
+#fbuilder .fieldCalendar {
+  flex: 0 0 40%;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
 #fbuilder .slotsCalendar {
-  flex: 1 1 300px;                /* Grow/shrink with min-width 300px */
-  max-width: calc(50% - 10px);    /* Roughly half the container minus gap */
-  min-width: 280px;               /* Prevents too-narrow boxes */
-  box-sizing: border-box;         /* Include padding in width */
+  flex: 0 0 30%;
+  overflow-y: auto;
+  max-height: 560px;
+  box-sizing: border-box;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -29,23 +45,17 @@
 /* The previous version collapsed the slots panel until a date was
    selected. Those rules have been removed so the panel remains
    visible by default. */
-#fbuilder .slotsCalendar {
-  max-height: none !important; /* ensure panel is expanded */
-  opacity: 1 !important;       /* fully visible */
-  transform: none !important;  /* cancel sliding animation */
-  overflow: visible !important;
-}
 
 /* ─────────────────────────────────────────────────────────────
-   4) Calendar base: white “card” background so dates are visible
+   4) Calendar base styling
 ───────────────────────────────────────────────────────────── */
 #fbuilder .ui-datepicker {
-  background: #FFFFFF !important; /* White background like top form */
-  border-radius: 10px;            /* Rounded corners to match */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Gentle drop shadow */
-  color: #333333;                 /* Dark default text color */
-  width: 320px !important;           /* increased from ~280px to 320px */
-  padding: 16px 12px !important;      /* extra padding inside the calendar */
+  background: #fff !important;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,.08);
+  color: #0F172A;
+  padding: 32px !important;
+  width: 100% !important;
   box-sizing: border-box;
 }
 
@@ -53,19 +63,14 @@
    5) Calendar header (month/year + arrows)
 ───────────────────────────────────────────────────────────── */
 #fbuilder .ui-datepicker-header {
-  background: transparent !important; /* No extra background */
+  background: transparent !important;
   text-align: center;
-  padding: 8px 0;
-  font-size: 1.4rem;              /* Slightly larger for emphasis */
-  font-weight: 500;
-  color: #FFFFFF !important;      /* White text on black header background */
-  /* To put the header on black, override parent background */
+  padding-bottom: 16px;
 }
 #fbuilder .ui-datepicker .ui-datepicker-title {
-  background: #1a1a1a;            /* Black behind the month/year text */
-  padding: 6px 12px;
-  border-radius: 6px;
-  color: #FFFFFF !important;      /* White month/year letters */
+  font-size: 22px;
+  font-weight: 700;
+  color: #0F1A26;
   display: inline-block;
 }
 
@@ -76,9 +81,10 @@
   width: 24px;
   height: 24px;
   margin: 0 12px;
-  border: 2px solid #FFFFFF;      /* White circular border */
   border-radius: 50%;
-  background: transparent;
+  background: #E5E7EB;
+  color: #0F766E;
+  border: none;
   cursor: pointer;
   position: relative;
 }
@@ -88,8 +94,8 @@
   display: block;
   width: 6px;
   height: 6px;
-  border-top: 2px solid #FFFFFF;  /* White arrow shape */
-  border-right: 2px solid #FFFFFF;
+  border-top: 2px solid currentColor;  /* arrow shape */
+  border-right: 2px solid currentColor;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -102,78 +108,92 @@
    6) Weekday headings (DOM, SEG, TER, …)
 ───────────────────────────────────────────────────────────── */
 #fbuilder .ui-datepicker th {
-  background: transparent;        /* No shading behind weekday titles */
-  color: #555555;                 /* Medium‐dark text for weekdays */
-  font-weight: 500;
+  background: transparent;
+  color: #6B7280;
+  font-weight: 600;
   padding: 6px 0;
-  text-transform: uppercase;      /* Uppercase DOM/SEG/TER/etc. */
-  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
 }
 
 /* ─────────────────────────────────────────────────────────────
    7) Day cells: light‐grey squares, dark text
 ───────────────────────────────────────────────────────────── */
 #fbuilder .ui-datepicker td {
-  padding: 6px 0;
+  padding: 4px;
   text-align: center;
 }
 #fbuilder .ui-datepicker td a,
 #fbuilder .ui-datepicker td span {
   display: block;
-  width: 100%;
-  background: #F0F0F0 !important;    /* light‑gray tile */
-  color: #333333 !important;         /* dark number */
-  border-radius: 6px !important;
-  line-height: 28px !important;
+  width: 44px;
+  height: 44px;
+  background: #E5E7EB !important;
+  color: #374151 !important;
+  border-radius: 8px !important;
+  line-height: 44px !important;
   font-weight: 500;
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
-  opacity: 1 !important;             /* ensure visible */
+  opacity: 1 !important;
 }
 
 /* Hover on available days → LavaRun green */
 #fbuilder .ui-datepicker td:not(.ui-datepicker-unselectable) a:hover {
-  background: #20B2AA !important;     /* LavaRun green */
-  color: #FFFFFF !important;          /* white text when hovered */
+  background: #CBD5E1 !important;
+  color: #374151 !important;
 }
 
 /* Selected day styling → LavaRun red */
 #fbuilder .ui-datepicker td a.ui-state-active {
-  background: #E15252 !important; /* Bold red */
-  color: #FFFFFF !important;      /* White text */
-  transform: scale(1.05) !important;  /* Slight “pop” effect */
+  background: #0F766E !important;
+  color: #FFFFFF !important;
+  border-radius: 8px !important;
 }
 
 /* ─────────────────────────────────────────────────────────────
-   8) Time slots panel: dark background + pill‐style buttons
+   8) Time slots panel and tiles
 ───────────────────────────────────────────────────────────── */
-#fbuilder .slots {
-  background: #1a1a1a;            /* Slightly lighter black */
-  border-radius: 10px;
-  padding: 20px;
+#fbuilder .slotsHeading {
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  font-size: 18px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 24px;
+}
+#fbuilder .slots {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 8px rgba(0,0,0,.08);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 24px 32px;
 }
 #fbuilder .slots div a {
-  display: inline-block;
-  margin: 8px;
-  padding: 12px 20px;
-  border-radius: 8px;             /* Pill shape */
-  background: #F0F0F0;            /* Light pill so text is visible */
-  color: #333333;                 /* Dark text on pill */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 48px;
+  border-radius: 8px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  color: #0F172A;
+  font-size: 15px;
   font-weight: 600;
-  transition: all 0.2s ease-in-out;
+  transition: background .15s ease-in-out;
 }
 
 /* Hover on slot → blue background, white text */
 #fbuilder .slots div a:hover {
-  background-color: #4CA1AF !important; /* Medium teal */
-  color: #FFFFFF !important;
+  background-color: #D8EEEB !important;
 }
 
 /* Selected slot styling → LavaRun green */
 #fbuilder .slots .currentSelection a {
-  background-color: #20B2AA !important; /* Soft green */
-  color: #FFFFFF !important;            /* White text */
+  background-color: #0F766E !important;
+  color: #FFFFFF !important;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -185,17 +205,17 @@
 #fbuilder select,
 #fbuilder textarea,
 #fbuilder .uh {
-  color: #FFFFFF !important;      /* White labels/hints */
+  color: #0F172A !important;
 }
 #fbuilder input[type="text"],
 #fbuilder input[type="email"],
 #fbuilder select,
 #fbuilder textarea {
-  background: transparent !important; /* Allows black container to show */
-  border: 1px solid #CCCCCC !important; /* Light grey outline */
+  background: #fff !important;
+  border: 1px solid #E2E8F0 !important;
   border-radius: 6px !important;
   padding: 8px !important;
-  color: #FFFFFF !important;      /* White text inside inputs */
+  color: #0F172A !important;
 }
 
 
@@ -213,10 +233,8 @@
 
 /* Disabled/past days → very light gray + muted text */
 #fbuilder .ui-datepicker-unselectable .ui-state-default {
-  background: #E0E0E0 !important;     /* very light gray */
-  color: #AAAAAA !important;          /* muted gray text */
-  opacity: 1 !important;              /* ensure visible but muted */
-  pointer-events: none !important;    /* non‑clickable */
+  opacity: 0.35 !important;
+  pointer-events: none !important;
 }
 
 
@@ -231,29 +249,30 @@
    10) Submit button: consistent with LavaRun green/red hover
 ───────────────────────────────────────────────────────────── */
 #fbuilder .pbSubmit {
-  background: #20B2AA !important;  /* Soft green */
+  background: #0F766E !important;
   color: #FFFFFF !important;
-  border: 2px solid #20B2AA !important;
-  border-radius: 6px !important;
-  padding: 10px 20px !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px 24px !important;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  transition: background 0.2s ease-in-out;
 }
 #fbuilder .pbSubmit:hover {
-  background: #E15252 !important; /* Bold red */
-  border-color: #E15252 !important;
+  background: #0c625b !important;
 }
 
 /* ─────────────────────────────────────────────────────────────
    11) Responsive: stack calendar & slots on mobile screens
 ───────────────────────────────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   #fbuilder .dfield.fapp {
     flex-direction: column !important;
+    row-gap: 32px;
   }
   #fbuilder .fieldCalendar,
-  #fbuilder .slotsCalendar {
+  #fbuilder .slotsCalendar,
+  #fbuilder .profileColumn {
     max-width: 100% !important;
     flex: none !important;
     margin-bottom: 20px;
@@ -272,5 +291,21 @@
     height: 4px;
     border-top-width: 1.5px;
     border-right-width: 1.5px;
+  }
+}
+
+@media (max-width: 520px) {
+  #fbuilder .ui-datepicker td a,
+  #fbuilder .ui-datepicker td span {
+    width: 38px;
+    height: 38px;
+    line-height: 38px !important;
+    font-size: 14px;
+  }
+  #fbuilder .slots {
+    grid-template-columns: 1fr;
+  }
+  #fbuilder .slots div a {
+    width: 100%;
   }
 }

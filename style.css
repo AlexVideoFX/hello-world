@@ -11,7 +11,8 @@ body {
   box-shadow: 0 12px 32px rgba(0,0,0,.08);
   padding: 70px 70px 50px;        /* Spacious interior */
   display: flex !important;       /* Three-column layout */
-  column-gap: 48px;               /* Space between columns */
+  flex-direction: column;         /* stack on small screens */
+  gap: 24px;                      /* space between sections */
   align-items: flex-start;
   flex-wrap: wrap !important;
   font-family: 'Inter', 'Roboto', sans-serif;
@@ -21,19 +22,19 @@ body {
    2) Three column layout: Profile, Calendar, Slots
 ───────────────────────────────────────────────────────────── */
 #fbuilder .profileColumn {
-  flex: 0 0 30%;
-  max-width: 260px;
+  flex: 0 0 100%;
+  max-width: 100%;
   text-align: left;
   box-sizing: border-box;
 }
 #fbuilder .fieldCalendar {
-  flex: 0 0 40%;
+  flex: 0 0 100%;
   display: flex;
   justify-content: center;
   box-sizing: border-box;
 }
 #fbuilder .slotsCalendar {
-  flex: 0 0 30%;
+  flex: 0 0 100%;
   overflow-y: auto;
   max-height: 560px;
   box-sizing: border-box;
@@ -42,8 +43,25 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-=======
   width: 100%;
+}
+
+/* Desktop layout: side-by-side columns */
+@media (min-width: 768px) {
+  #fbuilder .dfield.fapp {
+    flex-direction: row;
+    gap: 48px;
+  }
+  #fbuilder .profileColumn {
+    flex: 0 0 30%;
+    max-width: 260px;
+  }
+  #fbuilder .fieldCalendar {
+    flex: 0 0 40%;
+  }
+  #fbuilder .slotsCalendar {
+    flex: 0 0 30%;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -286,38 +304,6 @@ body {
   background: #0c625b !important;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   11) Responsive: stack calendar & slots on mobile screens
-───────────────────────────────────────────────────────────── */
-@media (max-width: 900px) {
-  #fbuilder .dfield.fapp {
-    flex-direction: column !important;
-    row-gap: 32px;
-  }
-  #fbuilder .fieldCalendar,
-  #fbuilder .slotsCalendar,
-  #fbuilder .profileColumn {
-    max-width: 100% !important;
-    width: 100% !important;
-    flex: none !important;
-    margin-bottom: 20px;
-  }
-
-  /* Shrink arrow icons slightly for mobile */
-  #fbuilder .ui-datepicker-prev,
-  #fbuilder .ui-datepicker-next {
-    width: 18px;
-    height: 18px;
-    margin: 0 8px;
-  }
-  #fbuilder .ui-datepicker-prev:after,
-  #fbuilder .ui-datepicker-next:after {
-    width: 4px;
-    height: 4px;
-    border-top-width: 1.5px;
-    border-right-width: 1.5px;
-  }
-}
 
 @media (max-width: 520px) {
   #fbuilder .ui-datepicker td a,

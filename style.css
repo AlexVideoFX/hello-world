@@ -27,6 +27,10 @@ body {
 ───────────────────────────────────────────────────────────── */
 #fbuilder .profileColumn {
   flex: 0 0 100%;
+
+
+  max-width: 100%;
+
   text-align: left;
   box-sizing: border-box;
 }
@@ -45,6 +49,7 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
+
 }
 
 /* Desktop layout: side-by-side columns */
@@ -62,6 +67,27 @@ body {
   }
   #fbuilder .slotsCalendar {
     flex: 0 0 50%;
+  }
+
+  width: 100%;
+
+}
+
+/* Desktop layout: side-by-side columns */
+@media (min-width: 768px) {
+  #fbuilder .dfield.fapp {
+    flex-direction: row;
+    gap: 48px;
+  }
+  #fbuilder .profileColumn {
+    flex: 0 0 30%;
+    max-width: 260px;
+  }
+  #fbuilder .fieldCalendar {
+    flex: 0 0 40%;
+  }
+  #fbuilder .slotsCalendar {
+    flex: 0 0 30%;
   }
 }
 
@@ -306,11 +332,13 @@ body {
 }
 
 
+
 @media (max-width: 767px) {
   #fbuilder .slots {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 
 @media (max-width: 520px) {
   #fbuilder .ui-datepicker td a,

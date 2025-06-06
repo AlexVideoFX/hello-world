@@ -52,11 +52,22 @@ body {
 #fbuilder .ui-datepicker {
   background: #fff !important;
   border-radius: 16px;
-  box-shadow: 0 4px 8px rgba(0,0,0,.08);
+  box-shadow: none !important;
   color: #0F172A;
   padding: 32px !important;
   width: 100% !important;
   box-sizing: border-box;
+}
+#fbuilder .ui-datepicker-inline {
+  max-width: none !important;
+}
+
+#fbuilder .ui-datepicker table,
+#fbuilder .ui-datepicker thead,
+#fbuilder .ui-datepicker tr,
+#fbuilder .ui-datepicker th,
+#fbuilder .ui-datepicker td {
+  border: 0 !important;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -329,15 +340,22 @@ body {
 .formfields > * {
   margin: 0;
   padding: 0;
+
+=======
 =======
   margin: 0 !important;
   padding: 0 !important;
   width: 100% !important;
   box-sizing: border-box;
+
 }
 
 #fbuilder .formfields table,
 .formfields table {
+
+  width: auto !important;
+  margin: 0 auto;
+=======
 
   width: auto !important;
   margin: 0 auto;
@@ -357,7 +375,11 @@ body {
 
   padding: 2px 4px;
 =======
+
+  padding: 2px 4px;
+=======
   padding: 4px 8px;
+
 
   border: 1px solid #E2E8F0;
   text-align: left;
@@ -393,11 +415,28 @@ body {
 }
 
 
+=======
+
+
 @media (max-width: 720px) {
   .formfields {
     flex-direction: column;
     align-items: stretch;
   }
+
+}
+
+/* ─────────────────────────────────────────────────────────────
+   13) AHB field service special layout
+───────────────────────────────────────────────────────────── */
+#ahbfield_service {
+  display: block !important;
+  width: 100% !important;
+  flex-basis: 100% !important;
+  margin: 8px 0 !important;
+}
+
+=======
 =======
 =======
    12) Additional plugin utility classes
@@ -475,3 +514,4 @@ body {
   margin-top: 16px;
 
 }
+

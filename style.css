@@ -29,6 +29,12 @@
 /* The previous version collapsed the slots panel until a date was
    selected. Those rules have been removed so the panel remains
    visible by default. */
+#fbuilder .slotsCalendar {
+  max-height: none !important; /* ensure panel is expanded */
+  opacity: 1 !important;       /* fully visible */
+  transform: none !important;  /* cancel sliding animation */
+  overflow: visible !important;
+}
 
 /* ─────────────────────────────────────────────────────────────
    4) Calendar base: white “card” background so dates are visible

@@ -24,20 +24,11 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   3) Animate‐in behavior: hide slots panel until a date is clicked
+   3) Slots panel is visible at all times
 ───────────────────────────────────────────────────────────── */
-#fbuilder .slotsCalendar {
-  max-height: 0;                  /* Collapsed by default */
-  opacity: 0;                     /* Invisible until activated */
-  transform: translateY(-8px);    /* Slide up slightly */
-  transition: all 0.4s ease-in-out; /* Smooth slide/fade in */
-  overflow: hidden;               /* Hide overflow when collapsed */
-}
-#fbuilder .slotsCalendar.active {
-  max-height: 800px;              /* Large enough to show all slots */
-  opacity: 1;                     /* Fully visible */
-  transform: translateY(0);       /* Slide down into place */
-}
+/* The previous version collapsed the slots panel until a date was
+   selected. Those rules have been removed so the panel remains
+   visible by default. */
 
 /* ─────────────────────────────────────────────────────────────
    4) Calendar base: white “card” background so dates are visible

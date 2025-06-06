@@ -311,6 +311,63 @@ body {
 }
 
 /* ─────────────────────────────────────────────────────────────
+   12) Table cleanup and formfields container
+───────────────────────────────────────────────────────────── */
+#fbuilder .formfields,
+.formfields {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+#fbuilder .formfields table,
+.formfields table {
+  width: 100% !important;
+  margin: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+#fbuilder .formfields th,
+#fbuilder .formfields td,
+.formfields th,
+.formfields td {
+  padding: 4px 8px;
+  border: 1px solid #E2E8F0;
+  text-align: left;
+}
+
+.formfields th {
+  background: #F8FAFC;
+  font-weight: 600;
+}
+
+.formfields input,
+.formfields select,
+.formfields textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formfields label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.formfields button,
+.formfields input[type="submit"],
+.formfields input[type="button"] {
+  padding: 6px 12px;
+  background: #3182CE;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+=======
    12) Additional plugin utility classes
 ───────────────────────────────────────────────────────────── */
 #fbuilder .cp_avoid_hidden,
@@ -385,4 +442,3 @@ body {
 #fbuilder .captcha {
   margin-top: 16px;
 }
-
